@@ -1,10 +1,15 @@
-import { createBrowserRouter } from "react-router-dom";
+import { SignUpPage } from "@/pages/Auth/signUp";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
 
 const router = createBrowserRouter([
     {
         path:'/',
-        element:<><h1 className="text-amber-200">Home</h1></>
+        element:<Navigate to='/signup' replace={true}/>
+    },
+    {
+        path:'/signup',
+        element:<SignUpPage/>
     }
 ])
 
