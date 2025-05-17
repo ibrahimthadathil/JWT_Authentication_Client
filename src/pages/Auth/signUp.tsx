@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
-import { SignUpForm } from "@/components/signup"
+import { SignUpForm } from "@/components/signup-form"
 import {  Link } from "react-router-dom"
 
 export const metadata = {
