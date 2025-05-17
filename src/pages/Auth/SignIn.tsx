@@ -3,11 +3,6 @@ import { buttonVariants } from "@/components/ui/button"
 import { SignInForm } from "@/components/signin-form"
 import { Link } from "react-router-dom"
 
-export const metadata= {
-  title: "Sign In",
-  description: "Sign in to your account",
-}
-
 export default function SignInPage() {
   return (
     <div className="container flex min-h-screen w-full flex-col items-center justify-center py-8">

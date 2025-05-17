@@ -3,11 +3,6 @@ import { buttonVariants } from "@/components/ui/button"
 import { SignUpForm } from "@/components/signup-form"
 import {  Link } from "react-router-dom"
 
-export const metadata = {
-  title: "Sign Up",
-  description: "Create a new account",
-}
-
 export const SignUpPage = () => {
 
   return (
