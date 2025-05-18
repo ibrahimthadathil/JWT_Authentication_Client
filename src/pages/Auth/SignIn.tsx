@@ -2,8 +2,11 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { SignInForm } from "@/components/signin-form"
 import { Link } from "react-router-dom"
+import { testApi } from "@/service/api/userApi"
 
-export default function SignInPage() {
+export const SignInPage=()=> {
+  (async()=>await testApi())()
+
   return (
     <div className="container flex min-h-screen w-full flex-col items-center justify-center py-8">
       <Link
