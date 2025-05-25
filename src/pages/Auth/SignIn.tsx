@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import { testApi } from "@/service/api/userApi"
 
 export const SignInPage=()=> {
-  (async()=>await testApi())()
+  (async()=>await testApi())();
 
   return (
     <div className="container flex min-h-screen w-full flex-col items-center justify-center py-8">
