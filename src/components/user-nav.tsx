@@ -10,9 +10,24 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { useNavigate } from "react-router-dom"
+import { toast } from "sonner"
+import userAuthStore from "@/store/authStore"
+import { logoutUser } from "@/service/api/userApi"
 
 export function UserNav() {
 const navigate = useNavigate()
+const navigat = useNavigate()
+const {logout} = userAuthStore(state=>state)
+const handleLogout = async()=>{
+  try {
+    await logoutUser()
+    logout()
+    navigate('/logout')
+    toast.success('Logout successfully')
+  } catch (error) {
+    toast.error((error as Error).message)
+  }
+}
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -33,12 +48,12 @@ const navigate = useNavigate()
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => navigate("/profile")}>
+        {/* <DropdownMenuItem onClick={() => navigate("/profile")}>
           <User className="mr-2 h-4 w-4" />
           <span>Profile</span>
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => navigate("/signin")}>
+        <DropdownMenuItem onClick={() => handleLogout()}>
           <LogOut className="mr-2 h-4 w-4" />
           <span>Log out</span>
         </DropdownMenuItem>

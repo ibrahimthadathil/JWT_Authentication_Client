@@ -10,6 +10,7 @@ import { GoogleSignInButton } from "@/components/Google-signIn"
 import { toast } from "sonner"
 import { userSignUp } from "@/service/api/userApi"
 import { useNavigate } from "react-router-dom"
+import userAuthStore from "@/store/authStore"
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Name must be at least 2 characters.",
@@ -25,6 +26,7 @@ const formSchema = z.object({
 export const SignUpForm =()=> {
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
+  const {setUser} = userAuthStore((state)=>state)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -39,7 +41,7 @@ export const SignUpForm =()=> {
     setIsLoading(true)
     try{
      const data =  await userSignUp(values)
-      console.log('fromfrontent :- ',data)
+      setUser({name:values.name,email:values.email,_id:''})
       navigate('/profile')
       toast.success(data.message)
     } catch (error) {

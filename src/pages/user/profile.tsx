@@ -6,7 +6,7 @@ export default function ProfilePage() {
   return (
     <ProfileShell>
       <ProfileHeader heading="Profile" text="Manage your account settings and profile information." />
-      <div className="grid gap-10">
+      <div className="grid gap-10 p-10">
         <UserProfileForm />
       </div>
     </ProfileShell>

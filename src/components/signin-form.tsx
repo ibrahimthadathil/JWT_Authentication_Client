@@ -8,6 +8,10 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { GoogleSignInButton } from "@/components/Google-signIn"
+import { userSignIn } from "@/service/api/userApi"
+import { useNavigate } from "react-router-dom"
+import { toast } from "sonner"
+import userAuthStore from "@/store/authStore"
 
 const formSchema = z.object({
   email: z.string().email({
@@ -20,6 +24,8 @@ const formSchema = z.object({
 
 export function SignInForm() {
   const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
+  const {setUser} = userAuthStore((state)=>state)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -31,18 +37,15 @@ export function SignInForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true)
-
     try {
-      // Here you would typically call your authentication API
-      // For example: await signIn(values)
-
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-
       
+      const data = await userSignIn(values)
+      setUser(data.user)
+      toast.success(data.message)
+      navigate('/profile')
 
     } catch (error) {
-      
+      toast.error((error as Error).message)
     } finally {
       setIsLoading(false)
     }

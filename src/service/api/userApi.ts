@@ -14,3 +14,20 @@ export const userSignUp = async (userdata:{email:string,password:string,name:str
         throw error
     }
 }
+
+export const userSignIn = async  (userData:{email:string,password:string}) =>{
+    try {
+        const response = await api.post('/signin',userData)
+        return response.data
+    } catch (error) {
+        throw error
+    }
+}
+
+export const logoutUser = async () => {
+    try {
+        await api.post('/logout')
+    } catch (error) {
+        throw error
+    }
+}
