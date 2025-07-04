@@ -5,10 +5,12 @@ const api = axios.create({
     withCredentials:true
 })
 
-export const testApi = async()=>{
+
+export const userSignUp = async (userdata:{email:string,password:string,name:string})=>{
     try {
-       await api.post(`/test/${'working'}`) 
+        const response = await api.post('/signup',userdata)
+        return response.data
     } catch (error) {
-        alert('error in frontend api')
+        throw error
     }
 }

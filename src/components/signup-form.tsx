@@ -7,6 +7,9 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { GoogleSignInButton } from "@/components/Google-signIn"
+import { toast } from "sonner"
+import { userSignUp } from "@/service/api/userApi"
+import { useNavigate } from "react-router-dom"
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Name must be at least 2 characters.",
@@ -21,6 +24,7 @@ const formSchema = z.object({
 
 export const SignUpForm =()=> {
   const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -34,9 +38,12 @@ export const SignUpForm =()=> {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true)
     try{
-
+     const data =  await userSignUp(values)
+      console.log('fromfrontent :- ',data)
+      navigate('/profile')
+      toast.success(data.message)
     } catch (error) {
-     
+     toast.error((error as Error).message)
     } finally {
       setIsLoading(false)
     }
